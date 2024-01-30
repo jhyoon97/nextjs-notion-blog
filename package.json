@@ -1,0 +1,39 @@
+{
+  "name": "nextjs-boilerplate",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@next/eslint-plugin-next": "^14.1.0",
+    "dayjs": "^1.11.10",
+    "jotai": "^2.6.3",
+    "next": "14.1.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "styled-components": "^6.1.8"
+  },
+  "devDependencies": {
+    "@swc-jotai/react-refresh": "^0.1.0",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.1.0",
+    "eslint-config-next": "14.1.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "prettier": "^3.2.4",
+    "typescript": "^5"
+  }
+}
