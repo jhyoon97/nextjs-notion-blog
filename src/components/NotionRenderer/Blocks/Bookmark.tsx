@@ -117,7 +117,7 @@ const Bookmark = ({ block }: Props) => {
           const response = await fetch(
             `/api/metadata?url=${encodeURI(block.bookmark.url)}`
           );
-          const data = await response.json();
+          const data: OgObject = await response.json();
 
           setMetadata(data);
           setLoading("SUCCESS");
