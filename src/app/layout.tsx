@@ -1,3 +1,4 @@
+import "react-loading-skeleton/dist/skeleton.css";
 import type { Metadata } from "next";
 
 import dayjs from "dayjs";
