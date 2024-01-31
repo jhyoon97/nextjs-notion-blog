@@ -1,5 +1,11 @@
-const Home = () => {
-  return <div>hello world</div>;
+import notionServices from "@/services/notion";
+
+import PostList from "./PostList";
+
+const Page = async () => {
+  const postList = await notionServices.getList();
+
+  return <PostList postList={postList} />;
 };
 
-export default Home;
+export default Page;

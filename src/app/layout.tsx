@@ -3,10 +3,10 @@ import type { Metadata } from "next";
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 
+import Default from "@/layouts/Default";
+
 import JotaiProvider from "./JotaiProvider";
 import StyledComponentProvider from "./StyledComponentProvider";
-import RootWrapper from "./RootWrapper";
-import ContentWrapper from "./ContentWrapper";
 
 interface Props {
   children: React.ReactNode;
@@ -27,9 +27,7 @@ const RootLayout = ({ children }: Props) => {
       <body>
         <JotaiProvider>
           <StyledComponentProvider>
-            <RootWrapper>
-              <ContentWrapper>{children}</ContentWrapper>
-            </RootWrapper>
+            <Default>{children}</Default>
           </StyledComponentProvider>
         </JotaiProvider>
       </body>
