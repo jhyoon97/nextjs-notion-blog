@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Skeleton from "react-loading-skeleton";
 
 import type { BookmarkBlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
-import type { OgObject } from "open-graph-scraper/dist/lib/types";
+import type { MetadataResponse } from "@/types/app";
 
 import Caption from "../common/components/Caption";
 import { commonBox } from "../common/styles";
@@ -108,7 +108,7 @@ const Bookmark = ({ block }: Props) => {
   );
   const [thumbnailError, setThumbnailError] = useState(false);
   const [iconError, setIconError] = useState(false);
-  const [metadata, setMetadata] = useState<OgObject>({});
+  const [metadata, setMetadata] = useState<MetadataResponse>({});
 
   useEffect(() => {
     if (block.bookmark.url) {
@@ -117,13 +117,12 @@ const Bookmark = ({ block }: Props) => {
           const response = await fetch(
             `/api/metadata?url=${encodeURI(block.bookmark.url)}`
           );
-          const data: OgObject = await response.json();
+          const data: MetadataResponse = await response.json();
 
           setMetadata(data);
           setLoading("SUCCESS");
         } catch (err) {
           setLoading("FAILURE");
-          console.log(err);
         }
       })();
     }
@@ -150,7 +149,7 @@ const Bookmark = ({ block }: Props) => {
                 case "SUCCESS":
                   return (
                     <BookmarkStyles.Title>
-                      {metadata.ogTitle}
+                      {metadata.title}
                     </BookmarkStyles.Title>
                   );
                 default:
@@ -158,9 +157,9 @@ const Bookmark = ({ block }: Props) => {
               }
             })()}
 
-            {loading !== "LOADING" && metadata.ogDescription && (
+            {loading !== "LOADING" && metadata.description && (
               <BookmarkStyles.Description>
-                {metadata.ogDescription}
+                {metadata.description}
               </BookmarkStyles.Description>
             )}
           </BookmarkStyles.TextBoxHeader>
@@ -184,18 +183,16 @@ const Bookmark = ({ block }: Props) => {
             <BookmarkStyles.Url>{block.bookmark.url}</BookmarkStyles.Url>
           </BookmarkStyles.UrlRow>
         </BookmarkStyles.TextBox>
-        {loading !== "LOADING" &&
-          metadata.ogImage?.[0].url &&
-          !thumbnailError && (
-            <BookmarkStyles.ThumbnailBox>
-              <BookmarkStyles.Thumbnail
-                onError={() => setThumbnailError(true)}
-                src={metadata.ogImage[0].url}
-                loading="lazy"
-                alt=""
-              />
-            </BookmarkStyles.ThumbnailBox>
-          )}
+        {loading !== "LOADING" && metadata.image && !thumbnailError && (
+          <BookmarkStyles.ThumbnailBox>
+            <BookmarkStyles.Thumbnail
+              onError={() => setThumbnailError(true)}
+              src={metadata.image}
+              loading="lazy"
+              alt=""
+            />
+          </BookmarkStyles.ThumbnailBox>
+        )}
       </BookmarkStyles.Wrapper>
       {block.bookmark.caption.length > 0 && (
         <Caption richText={block.bookmark.caption} />
