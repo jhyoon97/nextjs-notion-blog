@@ -11,8 +11,8 @@ interface Props {
 }
 
 const AnchorText = styled.a`
-  color: ${({ theme }) => theme.link};
-  border-bottom: 1px solid ${({ theme }) => theme.link};
+  color: ${({ theme }) => theme.contents.link};
+  border-bottom: 1px solid ${({ theme }) => theme.contents.link};
   opacity: 0.6;
 
   &:hover {

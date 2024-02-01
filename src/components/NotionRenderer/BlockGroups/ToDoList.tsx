@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 import { BsCheck } from "react-icons/bs";
 
 import type { HasChildrenToDo } from "@/types/notion";
@@ -46,13 +46,13 @@ const Checkbox = styled.i<{ $checked: boolean }>`
   width: 100%;
   height: 1rem;
   border: 2px solid
-    ${({ theme, $checked }) => ($checked ? theme.blue : theme.boxBorder)};
-  background: ${({ theme, $checked }) => ($checked ? theme.blue : theme.white)};
+    ${({ theme, $checked }) =>
+      $checked ? theme.contents.highlight : theme.contents.border};
+  background: ${({ theme, $checked }) =>
+    $checked ? theme.contents.highlight : "transparent"};
 `;
 
 const ToDoList = ({ blocks, depth }: Props) => {
-  const theme = useTheme();
-
   return (
     <Wrapper>
       {blocks.map((item) => (
@@ -62,7 +62,7 @@ const ToDoList = ({ blocks, depth }: Props) => {
               <Checkbox $checked={item.to_do.checked}>
                 {item.to_do.checked && (
                   <BsCheck
-                    color={theme.white}
+                    color="#FFF"
                     size="18"
                     style={{ maxWidth: "unset" }}
                   />

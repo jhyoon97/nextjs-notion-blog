@@ -25,6 +25,9 @@ const GlobalStyles = styled.createGlobalStyle`
       sans-serif;
     font-size: inherit;
   }
+  code[class*="language-"] * {
+    font-family: inherit;
+  }
   *,
   :after,
   :before {

@@ -23,10 +23,10 @@ const BookmarkStyles = {
     margin: 0.5rem 0;
     width: 100%;
     border-radius: 3px;
-    border: 1px solid ${({ theme }) => theme.boxBorder};
+    border: 1px solid ${({ theme }) => theme.contents.border};
 
     &:hover {
-      background: ${({ theme }) => theme.hoverBackground};
+      background: ${({ theme }) => theme.contents.bgHover};
     }
 
     & .skeleton-container {
@@ -62,7 +62,7 @@ const BookmarkStyles = {
   `,
   Description: styled.span`
     font-size: 0.875rem;
-    color: ${({ theme }) => theme.subText};
+    color: ${({ theme }) => theme.contents.subText};
   `,
   UrlRow: styled.div`
     display: flex;

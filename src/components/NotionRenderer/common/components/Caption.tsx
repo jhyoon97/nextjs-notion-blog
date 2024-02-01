@@ -12,7 +12,7 @@ interface Props {
 const Wrapper = styled.figcaption`
   ${commonBox}
   margin-bottom: 0.25rem;
-  color: ${({ theme }) => theme.caption};
+  color: ${({ theme }) => theme.contents.caption};
   font-size: 0.9rem;
   text-align: center;
 `;

@@ -23,7 +23,7 @@ const Item = styled(Link)`
   align-items: flex-start;
   padding: 0.5rem 1rem;
   width: 100%;
-  border: 1px solid ${({ theme }) => theme.boxBorder};
+  border: 1px solid ${({ theme }) => theme.box.border};
   border-radius: 5px;
 
   &:not(:last-of-type) {
@@ -32,11 +32,11 @@ const Item = styled(Link)`
 `;
 
 const Title = styled.span`
-  color: ${({ theme }) => theme.postTitle};
+  color: ${({ theme }) => theme.box.title};
 `;
 
 const Date = styled.span`
-  color: ${({ theme }) => theme.postDate};
+  color: ${({ theme }) => theme.box.date};
   font-size: 0.8rem;
 `;
 

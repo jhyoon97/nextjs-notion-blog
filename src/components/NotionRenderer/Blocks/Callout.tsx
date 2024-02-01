@@ -50,7 +50,7 @@ const Callout = ({ block }: Props) => {
           }
 
           if (block.callout.color === "default") {
-            return theme.text;
+            return theme.contents.text;
           }
 
           return theme.notion[block.callout.color];
@@ -68,7 +68,7 @@ const Callout = ({ block }: Props) => {
         border: `1px solid ${
           block.callout.color.endsWith("background")
             ? "transparent"
-            : theme.boxBorder
+            : theme.contents.border
         }`,
       }}
     >

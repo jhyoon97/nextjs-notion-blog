@@ -56,7 +56,7 @@ const TableOfContentsFixedWrapper = styled.div`
 
 const CreatedAt = styled.time`
   margin-bottom: 2rem;
-  color: ${({ theme }) => theme.subText};
+  color: ${({ theme }) => theme.contents.subText};
   font-size: 1rem;
   display: block;
 `;

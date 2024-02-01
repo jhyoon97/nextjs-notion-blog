@@ -49,7 +49,7 @@ const ToggleButton = styled.button`
   }
 
   &:hover {
-    background: ${({ theme }) => theme.hoverBackground};
+    background: ${({ theme }) => theme.contents.bgHover};
   }
 `;
 

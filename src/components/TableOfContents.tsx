@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import useScroll from "@/hooks/useScroll";
 
@@ -16,15 +16,23 @@ const Wrapper = styled.div`
 `;
 
 const Item = styled.a<{ $isFocused: boolean }>`
-  color: ${({ theme, $isFocused }) => ($isFocused ? theme.blue : theme.text)};
   text-align: left;
   transform-origin: 0 50%;
   transition: transform 0.1s ease-in;
-  transform: scale(${({ $isFocused }) => ($isFocused ? 1.05 : 1)});
+  transform: scale(${({ $isFocused }) => ($isFocused ? 1.02 : 1)});
 
-  &:hover {
-    color: ${({ theme }) => theme.blue};
-  }
+  ${({ theme, $isFocused }) =>
+    $isFocused
+      ? css`
+          color: ${theme.tableOfContents.highlight};
+        `
+      : css`
+          color: ${theme.tableOfContents.text};
+
+          &:hover {
+            color: ${theme.tableOfContents.hover};
+          }
+        `}
 `;
 
 const TableOfContents = ({ blocks }: Props) => {

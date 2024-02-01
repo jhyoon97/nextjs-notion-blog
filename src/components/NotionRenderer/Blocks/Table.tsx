@@ -19,7 +19,7 @@ const Wrapper = styled.div`
 const StyledTable = styled.table`
   width: 100%;
   table-layout: fixed;
-  border: 1px solid ${({ theme }) => theme.boxBorder};
+  border: 1px solid ${({ theme }) => theme.contents.border};
 `;
 
 const Row = styled.tr<{ $isTitle: boolean }>`
@@ -30,7 +30,7 @@ const Row = styled.tr<{ $isTitle: boolean }>`
 
 const Cell = styled.td<{ $isTitle: boolean }>`
   padding: 0.5rem;
-  border: 1px solid ${({ theme }) => theme.boxBorder};
+  border: 1px solid ${({ theme }) => theme.contents.border};
   font-size: 1rem;
   text-align: center;
   background: ${({ theme, $isTitle }) =>

@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 const DividerLine = styled.div`
   width: 100%;
   height: 1px;
-  background: ${({ theme }) => theme.boxBorder};
+  background: ${({ theme }) => theme.contents.border};
 `;
 
 const Divider = () => {

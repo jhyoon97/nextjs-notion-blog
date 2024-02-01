@@ -21,7 +21,7 @@ const Header = {
     top: 0;
     left: 0;
     width: 100%;
-    background: ${({ theme }) => theme.headerBg};
+    background: ${({ theme }) => theme.header.bg};
   `,
   InnerWrapper: styled.div`
     display: flex;
@@ -38,7 +38,7 @@ const Header = {
     }
   `,
   Title: styled.h1`
-    color: ${({ theme }) => theme.headerText};
+    color: ${({ theme }) => theme.header.text};
     font-size: 1rem;
   `,
 };

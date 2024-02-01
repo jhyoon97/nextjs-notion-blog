@@ -13,8 +13,8 @@ interface Props {
 
 const CodeText = styled.code`
   padding: 0px 4px;
-  background: ${({ theme }) => theme.codeBg};
-  color: ${({ theme }) => theme.code};
+  background: ${({ theme }) => theme.contents.bgCode};
+  color: ${({ theme }) => theme.contents.code};
   border-radius: 4px;
 `;
 
