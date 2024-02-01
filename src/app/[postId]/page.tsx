@@ -2,6 +2,8 @@ import notionServices from "@/services/notion";
 
 import PostDetail from "./PostDetail";
 
+export const revalidate = 3500;
+
 export const generateStaticParams = async () => {
   const data = await notionServices.getList();
 
