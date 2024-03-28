@@ -28,6 +28,7 @@ const Wrapper = styled.div<{ $depth: number }>`
   align-items: flex-start;
   padding-left: ${({ $depth }) => ($depth > 1 ? 1.5 : 0)}rem;
   width: 100%;
+  color: ${({ theme }) => theme.contents.text};
 `;
 
 // 그룹핑이 필요한 블록 타입

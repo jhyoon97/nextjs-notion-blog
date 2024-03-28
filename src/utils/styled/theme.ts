@@ -1,4 +1,4 @@
-export type Palette = typeof light;
+export type Theme = typeof light;
 
 const light = {
   bg: "#fff",
@@ -10,6 +10,7 @@ const light = {
     bgHover: "#f0f0f0",
     bgCode: "#eeeeec",
     border: "#cdcdcd",
+    title: "#111",
     text: "#111",
     subText: "#999",
     highlight: "#2383e2",
@@ -51,8 +52,59 @@ const light = {
   },
 };
 
-// const dark: Palette = {}};
+const dark: Theme = {
+  bg: "#0f0f0f",
+  header: {
+    bg: "#232d3f",
+    text: "#fff",
+  },
+  contents: {
+    bgHover: "#232d3f",
+    bgCode: "#404040",
+    border: "#232d3f",
+    title: "#fff",
+    text: "#fff",
+    subText: "#eee",
+    highlight: "#03e6c8",
+    link: "#e8e7e3",
+    caption: "#fff",
+    code: "#fff",
+  },
+  tableOfContents: {
+    text: "#f0f0f0",
+    hover: "#03e6c8",
+    highlight: "#03e6c8",
+  },
+  box: {
+    bgHover: "#fff",
+    border: "#232d3f",
+    title: "#fff",
+    subText: "#fff",
+    date: "#fff",
+  },
+  notion: {
+    gray: "#cecaca",
+    brown: "#dcc6bc",
+    orange: "#f9cc9f",
+    yellow: "#ecd4ac",
+    green: "#bcdccb",
+    blue: "#b0d3e8",
+    purple: "#cebcdc",
+    pink: "#e5b3ce",
+    red: "#fdbd9b",
+    gray_background: "#37372f",
+    brown_background: "#3e2828",
+    orange_background: "#5b330b",
+    yellow_background: "#5c470a",
+    green_background: "#2b3f27",
+    blue_background: "#173e4f",
+    purple_background: "#332244",
+    pink_background: "#4c1a35",
+    red_background: "#5d090d",
+  },
+};
 
 export default {
   light,
+  dark,
 };

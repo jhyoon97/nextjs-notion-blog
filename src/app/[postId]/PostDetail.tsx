@@ -25,6 +25,7 @@ const Title = styled.h2`
   margin-bottom: 0.5rem;
   font-size: 2rem;
   font-weight: bold;
+  color: ${({ theme }) => theme.contents.title};
 `;
 
 const ContentsWrapper = styled.div`

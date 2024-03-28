@@ -56,6 +56,7 @@ const BookmarkStyles = {
   Title: styled.span`
     width: 100%;
     font-size: 1rem;
+    font-weight: bold;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -153,7 +154,11 @@ const Bookmark = ({ block }: Props) => {
                     </BookmarkStyles.Title>
                   );
                 default:
-                  return /(?:[\w-]+\.)+[\w-]+/.exec(block.bookmark.url);
+                  return (
+                    <BookmarkStyles.Title>
+                      {/(?:[\w-]+\.)+[\w-]+/.exec(block.bookmark.url)}
+                    </BookmarkStyles.Title>
+                  );
               }
             })()}
 
