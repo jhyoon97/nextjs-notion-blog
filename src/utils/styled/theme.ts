@@ -3,7 +3,8 @@ export type Theme = typeof light;
 const light = {
   bg: "#fff",
   header: {
-    bg: "#1f2328",
+    bg: "#232d3f",
+    switch: "#5b74a4",
     text: "#fff",
   },
   contents: {
@@ -13,7 +14,7 @@ const light = {
     title: "#111",
     text: "#111",
     subText: "#999",
-    highlight: "#2383e2",
+    highlight: "#008170",
     link: "#6e6b5e",
     caption: "rgba(55, 53, 47, 0.65)",
     code: "#eb5757",
@@ -21,7 +22,7 @@ const light = {
   tableOfContents: {
     text: "#333",
     hover: "#000",
-    highlight: "#2383e2",
+    highlight: "#008170",
   },
   box: {
     bgHover: "#f0f0f0",
@@ -56,6 +57,7 @@ const dark: Theme = {
   bg: "#0f0f0f",
   header: {
     bg: "#232d3f",
+    switch: "#5b74a4",
     text: "#fff",
   },
   contents: {
