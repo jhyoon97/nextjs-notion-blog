@@ -6,7 +6,6 @@ import timezone from "dayjs/plugin/timezone";
 
 import Default from "@/layouts/Default";
 
-import ClientOnly from "./ClientOnly";
 import JotaiProvider from "./JotaiProvider";
 import StyledComponentProvider from "./StyledComponentProvider";
 
@@ -27,13 +26,11 @@ const RootLayout = ({ children }: Props) => {
         />
       </head>
       <body>
-        <ClientOnly>
-          <JotaiProvider>
-            <StyledComponentProvider>
-              <Default>{children}</Default>
-            </StyledComponentProvider>
-          </JotaiProvider>
-        </ClientOnly>
+        <JotaiProvider>
+          <StyledComponentProvider>
+            <Default>{children}</Default>
+          </StyledComponentProvider>
+        </JotaiProvider>
       </body>
     </html>
   );

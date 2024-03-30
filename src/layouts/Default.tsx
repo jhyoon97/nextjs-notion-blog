@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import { useAtom } from "jotai";
@@ -94,8 +94,31 @@ const Theme = {
   `,
 };
 
+const StorageLoading = styled.div<{ $disable: boolean }>`
+  z-index: 999;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  opacity: ${({ $disable }) => ($disable ? 0 : 1)};
+  transition: opacity 0.5s ease-out;
+`;
+
 const Layout = ({ children }: Props) => {
   const [isDarkMode, setIsDarkMode] = useAtom(isDarkModeAtom);
+
+  const [storageLoaded, setStorageLoaded] = useState(false);
+
+  useEffect(() => {
+    const isDarkModeByStorage = localStorage.getItem("isDarkMode") || "true";
+    setIsDarkMode(isDarkModeByStorage === "true");
+    setTimeout(() => {
+      setStorageLoaded(true);
+    }, 500);
+  }, []);
 
   return (
     <Wrapper>
@@ -111,6 +134,7 @@ const Layout = ({ children }: Props) => {
               $isDarkMode={isDarkMode}
               onClick={() => {
                 setIsDarkMode(!isDarkMode);
+                localStorage.setItem("isDarkMode", String(!isDarkMode));
               }}
             >
               <Theme.Indicator $isDarkMode={isDarkMode} />
@@ -122,6 +146,8 @@ const Layout = ({ children }: Props) => {
       <Body.Wrapper>
         <Body.InnerWrapper>{children}</Body.InnerWrapper>
       </Body.Wrapper>
+
+      <StorageLoading $disable={storageLoaded} />
     </Wrapper>
   );
 };
