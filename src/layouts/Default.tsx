@@ -139,7 +139,7 @@ const Layout = ({ children }: Props) => {
             >
               <Theme.Indicator $isDarkMode={isDarkMode} />
             </Theme.Switch>
-            <HiMiniMoon size={14} />
+            <HiMiniMoon size={16} />
           </Theme.Wrapper>
         </Header.InnerWrapper>
       </Header.Wrapper>
