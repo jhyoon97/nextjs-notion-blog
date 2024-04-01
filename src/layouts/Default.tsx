@@ -85,12 +85,13 @@ const Theme = {
   Indicator: styled.div<{ $isDarkMode: boolean }>`
     position: absolute;
     top: 0;
-    left: ${({ $isDarkMode }) => ($isDarkMode ? 20 : -20)}px;
+    left: 0;
+    transform: translateX(${({ $isDarkMode }) => ($isDarkMode ? 50 : -50)}%);
     width: 40px;
     height: 100%;
     border-radius: 10px;
     background: ${({ theme }) => theme.header.bg};
-    transition: left 0.3s ease-out;
+    transition: transform 0.3s ease-out;
   `,
 };
 
