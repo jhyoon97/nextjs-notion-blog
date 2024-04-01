@@ -1,14 +1,28 @@
 import dayjs from "dayjs";
 import { isFullPage, isFullBlock } from "@notionhq/client";
 
+import config from "@/config";
 import type { PostResponse } from "@/types/app";
 import notionUtils from "@/utils/notion";
 import notionServices from "@/services/notion";
 
 import client from "./client";
 
-export default async (pageId: string): Promise<PostResponse> => {
+export default async (postId: string): Promise<PostResponse> => {
   try {
+    const {
+      results: [{ id: pageId }],
+    } = await client.databases.query({
+      database_id: config.notion.databaseId,
+      filter: {
+        and: [
+          {
+            property: "postId",
+            unique_id: { equals: Number(postId) },
+          },
+        ],
+      },
+    });
     const pageResponse = await client.pages.retrieve({
       page_id: pageId,
     });

@@ -1,5 +1,5 @@
 interface PostListItem {
-  id: string;
+  postId: string;
   title: string;
   createdAt: string;
 }

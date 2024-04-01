@@ -7,7 +7,7 @@ export const revalidate = 3500;
 export const generateStaticParams = async () => {
   const data = await notionServices.getList();
 
-  return data.map((item: any) => ({ postId: item.id }));
+  return data.map((item) => ({ postId: item.postId }));
 };
 
 const Page = async ({ params }: { params: { postId: string } }) => {

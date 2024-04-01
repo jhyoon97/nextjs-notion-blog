@@ -17,13 +17,18 @@ export default async (): Promise<PostListResponse> => {
           direction: "descending",
         },
       ],
-      filter:
-        process.env.NODE_ENV === "production"
-          ? {
-              property: "isPublic",
-              checkbox: { equals: true },
-            }
-          : undefined,
+      filter: {
+        and: [
+          {
+            property: "isPublic",
+            checkbox: { equals: true },
+          },
+          {
+            property: "postId",
+            unique_id: { is_not_empty: true },
+          },
+        ],
+      },
     });
 
     const data = [];
@@ -31,9 +36,11 @@ export default async (): Promise<PostListResponse> => {
     for (let i = 0; i < response.results.length; i += 1) {
       const item = response.results[i];
 
-      if (isFullPage(item)) {
+      if (isFullPage(item) && item.properties.postId.type === "unique_id") {
         data.push({
-          id: item.id,
+          postId: item.properties.postId.unique_id.number
+            ? item.properties.postId.unique_id.number.toString()
+            : "not-found",
           title: notionUtils.getPageTitle(item),
           createdAt: dayjs(item.created_time).format("YYYY-MM-DD HH:mm:ss"),
         });

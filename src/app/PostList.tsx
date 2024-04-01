@@ -44,7 +44,7 @@ const PostList = ({ postList }: Props) => {
   return (
     <List>
       {postList.map((item) => (
-        <Item key={item.id} href={`/${item.id}`}>
+        <Item key={item.postId} href={`/${item.postId}`}>
           <Title>{item.title}</Title>
           <Date>{dayjs(item.createdAt).format("YYYY-MM-DD")}</Date>
         </Item>
