@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   width: 100%;
 `;
 
-const Item = styled.a<{ $isFocused: boolean }>`
+const Item = styled.button<{ $isFocused: boolean }>`
   text-align: left;
   transform-origin: 0 50%;
   transition: transform 0.1s ease-in;
