@@ -79,10 +79,6 @@ const PostDetail = ({ data }: Props) => {
         <CreatedAt>{data.createdAt}</CreatedAt>
       </TitleWrapper>
 
-      <ContentsWrapper ref={contentsBoxRef}>
-        <NotionRenderer blocks={data.blocks} />
-      </ContentsWrapper>
-
       {tableOfContentsTop !== undefined && (
         <TableOfContentsWrapper
           style={{
@@ -94,6 +90,10 @@ const PostDetail = ({ data }: Props) => {
           </TableOfContentsFixedWrapper>
         </TableOfContentsWrapper>
       )}
+
+      <ContentsWrapper ref={contentsBoxRef}>
+        <NotionRenderer blocks={data.blocks} />
+      </ContentsWrapper>
     </Wrapper>
   );
 };

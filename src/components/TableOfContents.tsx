@@ -1,8 +1,12 @@
-import { useState, useMemo } from "react";
+import { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
+import { useAtom } from "jotai";
 
 import useScroll from "@/hooks/useScroll";
+import utils from "@/utils";
+import { tableOfContentsAtom } from "@/atoms/tableOfContents";
 
+import type { TableOfContentsInterface } from "@/types/app";
 import type { HasChildrenBlockObject } from "@/types/notion";
 
 interface Props {
@@ -37,22 +41,46 @@ const Item = styled.a<{ $isFocused: boolean }>`
 
 const TableOfContents = ({ blocks }: Props) => {
   const [focusHeadingId, setFocusHeadingId] = useState("");
+  const [tableOfContents, setTableOfContents] = useAtom(tableOfContentsAtom);
 
-  const tableOfContents = useMemo(() => {
-    return blocks
-      .filter((block) => block.type.startsWith("heading_"))
-      .map((block) => ({
-        type: block.type,
-        id: block.id,
-        text: (block as any)[block.type].rich_text
-          .map((item: any) => item.text.content)
-          .join(""),
-      }));
+  useEffect(() => {
+    setTableOfContents(
+      blocks.reduce<TableOfContentsInterface>((acc, block) => {
+        if (
+          block.type === "heading_1" ||
+          block.type === "heading_2" ||
+          block.type === "heading_3"
+        ) {
+          const targetBlock = (() => {
+            switch (block.type) {
+              case "heading_1":
+                return block.heading_1;
+              case "heading_2":
+                return block.heading_2;
+              default:
+                return block.heading_3;
+            }
+          })();
+
+          acc.push({
+            type: block.type,
+            id: block.id,
+            text: targetBlock.rich_text
+              .map((item: any) => item.plain_text)
+              .join(""),
+          });
+        }
+
+        return acc;
+      }, [])
+    );
   }, [blocks]);
 
   useScroll(() => {
     for (let i = tableOfContents.length - 1; i >= 0; i -= 1) {
-      const element = document.getElementById(tableOfContents[i].id);
+      const element = document.getElementById(
+        utils.convertCleanedText(tableOfContents[i].text)
+      );
 
       if (
         window.scrollY + (element?.getBoundingClientRect().y || 0) <=
@@ -75,7 +103,15 @@ const TableOfContents = ({ blocks }: Props) => {
           style={{
             marginLeft: `${Number(item.type.replace("heading_", ""))}rem`,
           }}
-          href={`#${item.id}`}
+          onClick={() => {
+            const element = document.getElementById(
+              utils.convertCleanedText(item.text)
+            );
+
+            window.scrollTo({
+              top: window.scrollY + (element?.getBoundingClientRect().y || 0),
+            });
+          }}
         >
           {item.text}
         </Item>

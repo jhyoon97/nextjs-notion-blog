@@ -19,3 +19,11 @@ export interface MetadataResponse {
   favicon?: string;
   image?: string;
 }
+
+interface TableOfContentsItem {
+  type: "heading_1" | "heading_2" | "heading_3";
+  id: string;
+  text: string;
+}
+
+export type TableOfContentsInterface = Array<TableOfContentsItem>;

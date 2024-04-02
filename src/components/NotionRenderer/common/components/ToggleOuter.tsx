@@ -53,9 +53,7 @@ const ToggleButton = styled.button`
   }
 `;
 
-const ChildrenWrapper = styled.div`
-  margin-left: 1.5rem;
-`;
+const ChildrenWrapper = styled.div``;
 
 const ToggleOuter = ({
   childrenBlocks,
@@ -88,7 +86,7 @@ const ToggleOuter = ({
         <ChildrenWrapper>
           <NotionRenderer
             blocks={childrenBlocks}
-            depth={depth}
+            depth={depth + 1}
             style={{ marginTop: "0.5rem" }}
           />
         </ChildrenWrapper>

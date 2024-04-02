@@ -1,9 +1,14 @@
 import styled from "styled-components";
+import { useAtom } from "jotai";
+
+import utils from "@/utils";
+import { tableOfContentsAtom } from "@/atoms/tableOfContents";
 
 import type { HasChildrenToggleableHeading1 } from "@/types/notion";
 
 import ToggleOuter from "../common/components/ToggleOuter";
 import RichText from "../common/components/RichText";
+import InlineCopyButton from "../common/components/InlineCopyButton";
 import { commonBox } from "../common/styles";
 
 interface Props {
@@ -13,8 +18,13 @@ interface Props {
 
 const Wrapper = styled.div`
   ${commonBox}
+  position: relative;
   margin: 2rem 0 1rem;
   font-size: 1.6rem;
+
+  &:hover .inline-copy-button {
+    display: block;
+  }
 `;
 
 const Heading = styled.h3`
@@ -30,10 +40,17 @@ const Anchor = styled.div`
 
 const HeadingLevel1 = ({ block, depth }: Props) => {
   // 헤더에서 h1태그, 타이틀에서 h2 태그 사용중이므로 h3태그 사용
+  const [tableOfContents] = useAtom(tableOfContentsAtom);
+  const hash = utils.convertCleanedText(
+    block.heading_1.rich_text.map((item) => item.plain_text).join("")
+  );
 
   return (
     <Wrapper>
-      <Anchor id={block.id} />
+      {tableOfContents.some((item) => item.id === block.id) && (
+        <InlineCopyButton lineHeight={1.6} hash={hash} />
+      )}
+      <Anchor id={hash} />
       <ToggleOuter
         childrenBlocks={block.heading_1.children}
         isToggleable={block.heading_1.is_toggleable}
