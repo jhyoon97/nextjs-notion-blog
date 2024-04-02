@@ -8,6 +8,7 @@ import { HiMiniMoon, HiMiniSun } from "react-icons/hi2";
 
 import constants from "@/utils/constants";
 import { isDarkModeAtom } from "@/atoms/isDarkMode";
+import config from "@/config";
 
 interface Props {
   children: React.ReactNode;
@@ -126,7 +127,7 @@ const Layout = ({ children }: Props) => {
       <Header.Wrapper>
         <Header.InnerWrapper>
           <Link href="/">
-            <Header.Title>jhdev</Header.Title>
+            <Header.Title>{config.title}</Header.Title>
           </Link>
 
           <Theme.Wrapper>

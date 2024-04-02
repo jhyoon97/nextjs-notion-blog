@@ -1,15 +1,15 @@
-# Next.js + Typescript 보일러플레이트
+# Next.js + 개발 블로그 스타트킷
 
-## 1. 패키지매니저
+link: https://jhdev.vercel.app/
 
-- yarn
+## Package manager
 
-## 2. 코드 스타일
+yarn
 
-- eslint(airbnb)
-- prettier
+## Stack
 
-## 3. packages
-
-- next.js (14.1.0)
+- Next.js
+- React.js
+- jotai
 - styled-components
+- dayjs
