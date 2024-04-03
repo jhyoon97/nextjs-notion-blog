@@ -1,26 +1,32 @@
 import styled from "styled-components";
 import { LuLink } from "react-icons/lu";
 
+import constants from "@/utils/constants";
+
+import { LINE_HEIGHT } from "../constants";
+
 interface Props {
-  lineHeight: number;
   hash: string;
 }
 
-const Wrapper = styled.button<{ $height: number }>`
+const Wrapper = styled.button`
   display: none;
   position: absolute;
-  top: 50%;
+  top: 0;
   left: 0;
-  padding-right: 10px;
-  transform: translate(-100%, -50%);
-  height: ${({ $height }) => $height}em;
+  padding: 0 5px;
+  transform: translateX(-100%);
+  height: ${LINE_HEIGHT}em;
+
+  ${constants.mediaQuery.isTablet} {
+    padding: 0 1px;
+  }
 `;
 
-const InlineCopyButton = ({ lineHeight, hash }: Props) => {
+const InlineCopyButton = ({ hash }: Props) => {
   return (
     <Wrapper
       className="inline-copy-button"
-      $height={lineHeight}
       onClick={() => {
         navigator.clipboard.writeText(
           `${window.location.href.split("#")[0]}#${hash}`
@@ -29,7 +35,7 @@ const InlineCopyButton = ({ lineHeight, hash }: Props) => {
         alert("URL이 복사되었습니다.");
       }}
     >
-      <LuLink size={18} />
+      <LuLink size={16} />
     </Wrapper>
   );
 };

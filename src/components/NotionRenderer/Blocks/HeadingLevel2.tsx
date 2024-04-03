@@ -48,7 +48,7 @@ const HeadingLevel2 = ({ block, depth }: Props) => {
   return (
     <Wrapper>
       {tableOfContents.some((item) => item.id === block.id) && (
-        <InlineCopyButton lineHeight={1.4} hash={hash} />
+        <InlineCopyButton hash={hash} />
       )}
       <Anchor id={hash} />
       <ToggleOuter

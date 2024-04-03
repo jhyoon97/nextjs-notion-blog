@@ -38,7 +38,7 @@ const Header = {
     max-width: 1200px;
 
     ${constants.mediaQuery.isTablet} {
-      padding: 1rem;
+      padding: 1rem 1.5rem;
     }
   `,
   Title: styled.h1`
@@ -60,7 +60,7 @@ const Body = {
     max-width: 1200px;
 
     ${constants.mediaQuery.isTablet} {
-      padding: 1rem;
+      padding: 1rem 1.5rem;
     }
   `,
 };

@@ -1,5 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
+import constants from "@/utils/constants";
+
 const styled = { createGlobalStyle };
 
 const GlobalStyles = styled.createGlobalStyle`
@@ -47,6 +49,10 @@ const GlobalStyles = styled.createGlobalStyle`
   html {
     background: ${(props) => props.theme.bg};
     font-size: 16px;
+
+    ${constants.mediaQuery.isMobile} {
+      font-size: 14px;
+    }
   }
   html,
   body,
