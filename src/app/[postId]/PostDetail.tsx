@@ -2,8 +2,11 @@
 
 import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
+import { useAtom } from "jotai";
 
-import type { PostResponse } from "@/types/app";
+import type { PostResponse, TableOfContentsInterface } from "@/types/app";
+
+import { tableOfContentsAtom } from "@/atoms/tableOfContents";
 import NotionRenderer from "@/components/NotionRenderer";
 import TableOfContents from "@/components/TableOfContents";
 import constants from "@/utils/constants";
@@ -28,10 +31,11 @@ const Title = styled.h2`
   color: ${({ theme }) => theme.contents.title};
 `;
 
-const ContentsWrapper = styled.div`
+const ContentsWrapper = styled.div<{ $hasTableOfContents: boolean }>`
   display: flex;
   flex-direction: row;
-  width: calc(100% - 300px);
+  width: ${({ $hasTableOfContents }) =>
+    $hasTableOfContents ? "calc(100% - 300px)" : "100%"};
 
   ${constants.mediaQuery.isTablet} {
     width: 100%;
@@ -64,6 +68,7 @@ const CreatedAt = styled.time`
 
 const PostDetail = ({ data }: Props) => {
   const contentsBoxRef = useRef<HTMLDivElement>(null);
+  const [tableOfContents, setTableOfContents] = useAtom(tableOfContentsAtom);
   const [tableOfContentsTop, setTableOfContentsTop] = useState<
     undefined | number
   >(undefined);
@@ -72,6 +77,39 @@ const PostDetail = ({ data }: Props) => {
     setTableOfContentsTop(contentsBoxRef.current?.offsetTop);
   }, []);
 
+  useEffect(() => {
+    setTableOfContents(
+      data.blocks.reduce<TableOfContentsInterface>((acc, block) => {
+        if (
+          block.type === "heading_1" ||
+          block.type === "heading_2" ||
+          block.type === "heading_3"
+        ) {
+          const targetBlock = (() => {
+            switch (block.type) {
+              case "heading_1":
+                return block.heading_1;
+              case "heading_2":
+                return block.heading_2;
+              default:
+                return block.heading_3;
+            }
+          })();
+
+          acc.push({
+            type: block.type,
+            id: block.id,
+            text: targetBlock.rich_text
+              .map((item: any) => item.plain_text)
+              .join(""),
+          });
+        }
+
+        return acc;
+      }, [])
+    );
+  }, [data.blocks]);
+
   return (
     <Wrapper>
       <TitleWrapper>
@@ -79,19 +117,22 @@ const PostDetail = ({ data }: Props) => {
         <CreatedAt>{data.createdAt}</CreatedAt>
       </TitleWrapper>
 
-      {tableOfContentsTop !== undefined && (
+      {tableOfContents.length > 0 && tableOfContentsTop !== undefined && (
         <TableOfContentsWrapper
           style={{
             top: tableOfContentsTop,
           }}
         >
           <TableOfContentsFixedWrapper>
-            <TableOfContents blocks={data.blocks} />
+            <TableOfContents />
           </TableOfContentsFixedWrapper>
         </TableOfContentsWrapper>
       )}
 
-      <ContentsWrapper ref={contentsBoxRef}>
+      <ContentsWrapper
+        ref={contentsBoxRef}
+        $hasTableOfContents={tableOfContents.length > 0}
+      >
         <NotionRenderer blocks={data.blocks} />
       </ContentsWrapper>
     </Wrapper>

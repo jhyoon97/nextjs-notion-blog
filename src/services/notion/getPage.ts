@@ -15,12 +15,8 @@ export default async (postId: string): Promise<PostResponse> => {
     } = await client.databases.query({
       database_id: config.notion.databaseId,
       filter: {
-        and: [
-          {
-            property: "postId",
-            unique_id: { equals: Number(postId) },
-          },
-        ],
+        property: "postId",
+        unique_id: { equals: Number(postId) },
       },
     });
     const pageResponse = await client.pages.retrieve({

@@ -1,17 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled, { css } from "styled-components";
 import { useAtom } from "jotai";
 
 import useScroll from "@/hooks/useScroll";
 import utils from "@/utils";
 import { tableOfContentsAtom } from "@/atoms/tableOfContents";
-
-import type { TableOfContentsInterface } from "@/types/app";
-import type { HasChildrenBlockObject } from "@/types/notion";
-
-interface Props {
-  blocks: Array<HasChildrenBlockObject>;
-}
 
 const Wrapper = styled.div`
   display: flex;
@@ -39,42 +32,9 @@ const Item = styled.button<{ $isFocused: boolean }>`
         `}
 `;
 
-const TableOfContents = ({ blocks }: Props) => {
+const TableOfContents = () => {
   const [focusHeadingId, setFocusHeadingId] = useState("");
-  const [tableOfContents, setTableOfContents] = useAtom(tableOfContentsAtom);
-
-  useEffect(() => {
-    setTableOfContents(
-      blocks.reduce<TableOfContentsInterface>((acc, block) => {
-        if (
-          block.type === "heading_1" ||
-          block.type === "heading_2" ||
-          block.type === "heading_3"
-        ) {
-          const targetBlock = (() => {
-            switch (block.type) {
-              case "heading_1":
-                return block.heading_1;
-              case "heading_2":
-                return block.heading_2;
-              default:
-                return block.heading_3;
-            }
-          })();
-
-          acc.push({
-            type: block.type,
-            id: block.id,
-            text: targetBlock.rich_text
-              .map((item: any) => item.plain_text)
-              .join(""),
-          });
-        }
-
-        return acc;
-      }, [])
-    );
-  }, [blocks]);
+  const [tableOfContents] = useAtom(tableOfContentsAtom);
 
   useScroll(() => {
     for (let i = tableOfContents.length - 1; i >= 0; i -= 1) {
